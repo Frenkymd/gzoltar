@@ -148,10 +148,19 @@ public class FaultLocalizationTxtReport implements IFaultLocalizationReportForma
 
     // content
     for (Transaction transaction : transactions) {
-      testsWriter.println(transaction.getName() + ","
-          + (transaction.hasFailed() ? TransactionOutcome.FAIL.name()
-              : TransactionOutcome.PASS.name())
-          + "," + transaction.getRuntime() + "," + transaction.getStackTrace());
+      testsWriter.println(
+        '"' +
+        transaction.getName().replaceAll("\"", "\"\"") +
+        '"' +
+        ',' +
+        (transaction.hasFailed() ? TransactionOutcome.FAIL.name() : TransactionOutcome.PASS.name()) +
+        ',' +
+        transaction.getRuntime() +
+        ',' +
+        '"' +
+        transaction.getStackTrace().replaceAll("\"", "\"\"") +
+        '"'
+      );
     }
 
     testsWriter.close();
