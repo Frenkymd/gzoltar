@@ -116,7 +116,7 @@ public class JUnitFormatter extends Listener implements JUnitResultFormatter {
 
     {
       Pattern regexp = Pattern.compile("(.*)\\((.*)\\)");
-      Matcher match = regexp.matcher(test.toString());
+      Matcher match = regexp.matcher(test.toString().trim());
       if (match.matches()) {
         className = match.group(2);
         methodName = match.group(1);
@@ -125,7 +125,7 @@ public class JUnitFormatter extends Listener implements JUnitResultFormatter {
     {
       // for some weird reason this format is used for Timeout in Junit4
       Pattern regexp = Pattern.compile("(.*):(.*)");
-      Matcher match = regexp.matcher(test.toString());
+      Matcher match = regexp.matcher(test.toString().trim());
       if (match.matches()) {
         className = match.group(1);
         methodName = match.group(2);
